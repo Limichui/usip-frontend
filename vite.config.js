@@ -7,5 +7,6 @@ export default defineConfig({
   base: '/',
   css: {
     devSourcemap: false, // Evita la carga de source maps en CSS
+    sourcemap: false, 
   }
 })
