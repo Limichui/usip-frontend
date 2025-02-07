@@ -1,8 +1,11 @@
 import { useState } from "react";
+import { useNavigate } from 'react-router';
 import useForm from "../hooks/useForm.js";
 import { login } from "../../api/loginApi.js";
 
 const FormLogin = () => {
+    const navigate = useNavigate()
+    
     const { formData, handleChange } = useForm({
         username: "",
         password: "",
@@ -26,7 +29,7 @@ const FormLogin = () => {
             localStorage.setItem("token", data.token);
 
             // Redirigir al usuario
-            window.location.href = "/dashboard";
+            navigate('/dashboard');
 
         } catch (err) {
             setError(err.response?.data?.message || "Error al iniciar sesión");
