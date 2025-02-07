@@ -1,6 +1,6 @@
-import axios from "axios";
 import { useState } from "react";
 import useForm from "../hooks/useForm.js";
+import { login } from "../../api/loginApi.js";
 
 const FormLogin = () => {
     const { formData, handleChange } = useForm({
@@ -20,7 +20,7 @@ const FormLogin = () => {
         setError(""); // Limpiar errores previos
         
         try {
-            const { data } = await axios.post("http://localhost:3000/api/users/", formData);
+            const { data } = await login(formData);
 
             // Guardar token
             localStorage.setItem("token", data.token);
