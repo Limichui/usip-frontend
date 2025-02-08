@@ -17,3 +17,85 @@ body {
 .nav-style:hover {
     opacity: 100% !important;
 }
+
+/* Menú lateral visible */
+.app-menu {
+    position: fixed;
+    left: 0; /* Ahora el menú está visible por defecto */
+    width: 250px;
+    height: 100vh;
+    background-color: #2a3042;
+    transition: left 0.3s ease-in-out;
+}
+
+.app-menu.menu-open {
+    left: 0;
+}
+
+.app-menu:not(.menu-open) {
+    left: -250px; /* Se oculta al hacer clic en el botón */
+}
+
+/* Menú lateral oculto */
+.app-menu.menu-closed {
+    left: -250px; /* Se oculta completamente */
+}
+
+/* Contenedor principal con menú abierto */
+.main-content {
+    margin-left: 250px; /* Ocupa el espacio normal cuando el menú está abierto */
+    transition: all 0.3s ease-in-out;
+    /*position: relative;
+    z-index: 100; /* Asegura que esté sobre posibles capas de bloqueo */
+}
+
+/* Contenedor principal cuando el menú está cerrado */
+.main-content.full-width {
+    margin-left: 0; /* Se expande completamente hacia la izquierda */
+    width: 100%;
+}
+
+.vertical-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 99;
+    transition: opacity 0.3s ease-in-out;
+}
+/*
+.vertical-overlay.active {
+    display: block;
+}
+*/
+/* Header cuando el menú está abierto */
+#page-topbar {
+    position: fixed;
+    top: 0;
+    left: 250px; /* Alineado con el menú */
+    width: calc(100% - 250px);
+    transition: left 0.3s ease-in-out, width 0.3s ease-in-out;
+}
+
+/* Header cuando el menú está oculto */
+#page-topbar.expanded-header {
+    left: 0;
+    width: 100%;
+}
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    left: 250px;
+    width: calc(100% - 250px); /* Cuando el menú está abierto */
+    transition: left 0.3s ease-in-out, width 0.3s ease-in-out;
+}
+
+/* Expande el footer cuando el menú está cerrado */
+.footer.full-width {
+    left: 0;
+    width: 100%;
+}

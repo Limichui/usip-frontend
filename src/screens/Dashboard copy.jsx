@@ -27,7 +27,7 @@ const Dashboard = () => {
                                     id="topnav-hamburger-icon"
                                     onClick={toggleMenu}
                                 >
-                                    <span className={`hamburger-icon ${isMenuOpen ? "" : "open"}`}>
+                                    <span className="hamburger-icon">
                                         <span></span>
                                         <span></span>
                                         <span></span>
@@ -96,14 +96,23 @@ const Dashboard = () => {
                                 <div id="two-column-menu"></div>
                                 <ul className="navbar-nav" id="navbar-nav">
                                     <li className="menu-title"><span data-key="t-menu">Menu</span></li>
-
                                     <li className="nav-item">
-                                        <a className="nav-link menu-link nav-style" href="widgets.html">
+                                        <a className="nav-link menu-link nav-style" href="#sidebarDashboards" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarDashboards">
                                             <div>
-                                                <i className="ri-dashboard-2-line"></i> <span data-key="t-widgets" >Panel de Control</span>
+                                                <i className="ri-dashboard-2-line"></i> <span data-key="t-dashboards">Panel de Control</span>
                                             </div>
                                             
                                         </a>
+                                        <div className="collapse menu-dropdown" id="sidebarDashboards">
+                                            <ul className="nav nav-sm flex-column">
+                                                <li className="nav-item">
+                                                    <a href="dashboard-analytics.html" className="nav-link" data-key="t-analytics"> Analytics </a>
+                                                </li>
+                                                <li className="nav-item">
+                                                    <a href="dashboard-crm.html" className="nav-link" data-key="t-crm"> CRM </a>
+                                                </li>
+                                            </ul>
+                                        </div>
                                     </li>
 
                                     <li className="nav-item">
@@ -241,7 +250,7 @@ const Dashboard = () => {
                         </div>
                     </div>
 
-                    <footer className={`footer ${isMenuOpen ? "" : "full-width"}`}>
+                    <footer className="footer">
                         <div className="container-fluid">
                             <div className="row">
                                 <div className="col-sm-6">
