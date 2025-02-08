@@ -3,3 +3,17 @@
 body {
     font-family: 'Montserrat', sans-serif;
 }
+
+/* NavBar*/
+.navbar-menu {
+    background: #405189;
+}
+
+.nav-style {
+    color: #FFF !important;
+    opacity: 70%;
+}
+
+.nav-style:hover {
+    opacity: 100% !important;
+}

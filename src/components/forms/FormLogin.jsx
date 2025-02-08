@@ -43,7 +43,6 @@ const FormLogin = () => {
         <div
             className="auth-one-bg-position auth-one-bg"
             id="auth-particles"
-            style={{ backgroundImage: "url(./assets/images/auth-one-bg.jpg)" }}
         >
             <div className="bg-overlay"></div>
             <div className="shape">
