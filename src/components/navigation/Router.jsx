@@ -5,15 +5,18 @@ import Courses from "../../screens/Courses.jsx"
 import Login from "../../screens/Login.jsx";
 
 import { Route, Routes } from "react-router";
+import { ProtectedRoute } from "./ProtectedRoute.jsx";
 
 const Router = () =>  {
     return (
         <Routes>
             <Route index element={<Login />} />
-            <Route path="/dashboard" element={<Dashboard/>} />
-            <Route path="/students" element={<Students />} />
-            <Route path="/teachers" element={<Teachers />} />
-            <Route path="/courses" element={<Courses />} />
+            <Route element={<ProtectedRoute />}>
+                <Route path="/dashboard" element={<Dashboard/>} />
+                <Route path="/students" element={<Students />} />
+                <Route path="/teachers" element={<Teachers />} />
+                <Route path="/courses" element={<Courses />} />
+            </Route>
         </Routes>
     );
 };
