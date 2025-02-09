@@ -2,8 +2,10 @@ import { useState } from "react";
 import { useNavigate } from 'react-router';
 import useForm from "../hooks/useForm.js";
 import { login } from "../../api/loginApi.js";
+import { useAuth } from "../../providers/AuthProvider.jsx";
 
 const FormLogin = () => {
+    const { setToken } = useAuth();
     const navigate = useNavigate()
     
     const { formData, handleChange } = useForm({
@@ -25,16 +27,18 @@ const FormLogin = () => {
         try {
             const { data } = await login(formData);
 
-            // Guardar token
-            localStorage.setItem("token", data.token);
+            if (typeof data == "object" && typeof data.token === "string") {
+                // Guardar token
+                setToken(data.token);
 
-            // Redirigir al usuario
-            navigate('/dashboard');
-
+                // Redirigir al usuario
+                navigate('/dashboard', { replace: true });
+            } else {
+                setError("Credenciales invalidos");
+            }
         } catch (err) {
             setError(err.response?.data?.message || "Error al iniciar sesión");
         }
-        console.log("datos del formulario", formData);
     };
 
     return (
