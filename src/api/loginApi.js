@@ -1,6 +1,9 @@
 import axios from "axios";
 import CONFIG from "../config/config";
 
-export const login = async (loginData) => {
-  return axios.post(`${CONFIG.apiHost}/api/users/`, loginData);
+export const login = async ({ username, password }) => {
+  return axios.post(`${CONFIG.apiHost}/api/login/`, {
+    usuario: username,
+    contraseña: password
+  });
 }
