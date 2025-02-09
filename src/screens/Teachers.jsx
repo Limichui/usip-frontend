@@ -5,11 +5,9 @@ import Header from "../components/fragments/Header.jsx";
 import Footer from "../components/fragments/Footer.jsx"; 
 import '../assets/js/layout.js'; 
 import '../assets/js/plugins.js'; 
-//import '../assets/js/app.js'; 
 import '../assets/css/style.css'
 
-const Dashboard = () => {
-
+const Students = () => {
     // Estado para manejar el despliegue del menú
     const [isMenuOpen, setIsMenuOpen] = useState(true);
 
@@ -30,7 +28,6 @@ const Dashboard = () => {
             {/* Begin page */}
             <div id="layout-wrapper">
                 <Header isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />
-                
 
                 {/* ========== App Menu ========== */}
                 <div className={`app-menu navbar-menu ${isMenuOpen ? "menu-open" : ""}`}>
@@ -88,7 +85,7 @@ const Dashboard = () => {
                             <div className="row">
                                 <div className="col-12">
                                     <div className="page-title-box d-sm-flex align-items-center justify-content-between bg-galaxy-transparent">
-                                        <h4 className="mb-sm-0">Panel de control</h4>
+                                        <h4 className="mb-sm-0">Panel de Docentes</h4>
                                     </div>
                                 </div>
                             </div>
@@ -174,12 +171,12 @@ const Dashboard = () => {
                             </div>
                         </div>
                     </div>
+
                     <Footer isMenuOpen={isMenuOpen} />
-                    
                 </div>
             </div>
         </div>
     );
 };
 
-export default Dashboard;
+export default Students;
