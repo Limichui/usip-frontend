@@ -32,7 +32,7 @@ const Students = () => {
             setStudents(data);
             setError(null);
         } catch (error) {
-            setError(error.message); // Mostrar mensaje real del error
+            setError("Error al cargar los datos");
         } finally {
             setLoading(false);
         }
@@ -52,6 +52,7 @@ const Students = () => {
             console.error("Datos incorrectos recibidos en handleUpdateStudent:", updatedStudent);
             return;
         }
+    
         setStudents((prevStudents) =>
             prevStudents.map((s) =>
                 s.id_estudiante === updatedStudent.id_estudiante ? updatedStudent : s
@@ -59,20 +60,34 @@ const Students = () => {
         );
     };
 
-    const handleDelete = async () => {
-        if (!studentToDelete) return;
-
-        try {
-            await deleteStudent(studentToDelete.id_estudiante);
-            setStudents(prevStudents => prevStudents.filter(student => student.id_estudiante !== studentToDelete.id_estudiante));
-            console.log("Estudiante eliminado con éxito");
-        } catch (error) {
-            console.log("Error al eliminar el estudiante: " , error.message);
-        } finally {
-            setIsDeleteModalOpen(false);
-            setStudentToDelete(null);
+    /*
+    const handleDelete = async (id_estudiante) => {
+        if (window.confirm("¿Estás seguro de que deseas eliminar este estudiante?")) {
+            try {
+                await deleteStudent(id_estudiante);
+                setStudents(students.filter(student => student.id_estudiante !== id_estudiante));
+                alert("Estudiante eliminado con éxito");
+            } catch (error) {
+                alert("Error al eliminar el estudiante: " + error.message);
+            }
         }
     };
+    */
+    const handleDelete = async () => {
+        if (!studentToDelete) return;
+    
+        try {
+            await deleteStudent(studentToDelete.id_estudiante);
+            setStudents(students.filter(student => student.id_estudiante !== studentToDelete.id_estudiante));
+            alert("Estudiante eliminado con éxito");
+        } catch (error) {
+            alert("Error al eliminar el estudiante: " + error.message);
+        } finally {
+            setIsDeleteModalOpen(false);  // Cerrar el modal después de eliminar
+            setStudentToDelete(null);     // Limpiar el estado
+        }
+    };
+    
 
     const openDeleteModal = (student) => {
         setStudentToDelete(student);
@@ -80,7 +95,7 @@ const Students = () => {
     };
 
     useEffect(() => {
-        fetchStudents();
+        fetchStudents(); // Cargar los estudiantes al montar el componente
     }, []);
 
     return (
@@ -149,18 +164,18 @@ const Students = () => {
                                                             <tr key={row.id_estudiante}>
                                                                 <td>{index + 1}</td>
                                                                 <td>{row.nombre} {row.apellido}</td>
-                                                                <td>{row.fecha_nacimiento?.split("T")[0] || "N/A"}</td>
+                                                                <td>{row.fecha_nacimiento.split("T")[0]}</td>
                                                                 <td>{row.genero}</td>
                                                                 <td>{row.direccion}</td>
                                                                 <td>{row.telefono}</td>
                                                                 <td>{row.correo}</td>
-                                                                <td>{row.fecha_inscripcion?.split("T")[0] || "N/A"}</td>
+                                                                <td>{row.fecha_inscripcion.split("T")[0]}</td>
                                                                 <td>
                                                                     <div className="hstack gap-3 fs-15">
                                                                         <button onClick={() => handleEdit(row)} className="btn btn-link link-secondary p-0 border-0">
-                                                                            <i className="ri-edit-2-fill"></i>
+                                                                        <i className="ri-edit-2-fill"></i>
                                                                         </button>
-                                                                        <button onClick={() => openDeleteModal(row)} className="btn btn-link link-danger p-0 border-0">
+                                                                        <button onClick={() => handleDelete(row.id_estudiante)} className="btn btn-link link-danger p-0 border-0">
                                                                             <i className="ri-delete-bin-5-line"></i>
                                                                         </button>
                                                                     </div>
@@ -202,4 +217,3 @@ const Students = () => {
 };
 
 export default Students;
-
