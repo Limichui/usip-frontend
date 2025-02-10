@@ -36,6 +36,10 @@ const Students = () => {
         }
     };
 
+    const handleAddStudent = (newStudent) => {
+        setStudents((prevStudents) => [...prevStudents, newStudent]);
+    };
+
     const handleEdit = (student) => {
         setSelectedStudent(student);
         setIsEditModalOpen(true);
@@ -169,7 +173,7 @@ const Students = () => {
                 </div>
             </div>
 
-            {isModalOpen && <ModalStudent isOpen={isModalOpen} onClose={closeModal} />}
+            {isModalOpen && <ModalStudent isOpen={isModalOpen} onClose={closeModal} onAdd={handleAddStudent} />}
             {isEditModalOpen && <ModalEditStudent 
                                     isOpen={isEditModalOpen} 
                                     onClose={() => setIsEditModalOpen(false)} 

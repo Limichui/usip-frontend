@@ -76,22 +76,22 @@ const ModalEditStudent = ({ isOpen, onClose, estudiante, onUpdate }) => {
                             <div className="row">
                                 <div className="col-md-6 mb-3">
                                     <label htmlFor="nombre" className="col-form-label">Nombre:</label>
-                                    <input type="text" className="form-control" id="nombre" value={formData.nombre} onChange={handleChange} />
+                                    <input type="text" className="form-control" id="nombre" value={formData.nombre} onChange={handleChange} required />
                                 </div>
                                 <div className="col-md-6 mb-3">
                                     <label htmlFor="apellido" className="col-form-label">Apellidos:</label>
-                                    <input type="text" className="form-control" id="apellido" value={formData.apellido} onChange={handleChange} />
+                                    <input type="text" className="form-control" id="apellido" value={formData.apellido} onChange={handleChange} required />
                                 </div>
                             </div>
 
                             <div className="row">
                                 <div className="col-md-6 mb-3">
                                     <label htmlFor="fecha_nacimiento" className="col-form-label">Fecha de nacimiento:</label>
-                                    <input type="date" className="form-control" id="fecha_nacimiento" value={formData.fecha_nacimiento} onChange={handleChange} />
+                                    <input type="date" className="form-control" id="fecha_nacimiento" value={formData.fecha_nacimiento} onChange={handleChange} required />
                                 </div>
                                 <div className="col-md-6 mb-3">
                                     <label htmlFor="genero" className="col-form-label">Género:</label>
-                                    <select className="form-select" id="genero" value={formData.genero} onChange={handleChange}>
+                                    <select className="form-select" id="genero" value={formData.genero} onChange={handleChange} required>
                                         <option value="">Seleccione una opción</option>
                                         <option value="Masculino">Masculino</option>
                                         <option value="Femenino">Femenino</option>
@@ -102,22 +102,22 @@ const ModalEditStudent = ({ isOpen, onClose, estudiante, onUpdate }) => {
                             <div className="row">
                                 <div className="col-md-6 mb-3">
                                     <label htmlFor="direccion" className="col-form-label">Dirección:</label>
-                                    <input type="text" className="form-control" id="direccion" value={formData.direccion} onChange={handleChange} />
+                                    <input type="text" className="form-control" id="direccion" value={formData.direccion} onChange={handleChange} required />
                                 </div>
                                 <div className="col-md-6 mb-3">
                                     <label htmlFor="telefono" className="col-form-label">Teléfono:</label>
-                                    <input type="text" className="form-control" id="telefono" value={formData.telefono} onChange={handleChange} />
+                                    <input type="text" className="form-control" id="telefono" value={formData.telefono} onChange={handleChange} required />
                                 </div>
                             </div>
 
                             <div className="row">
                                 <div className="col-md-6 mb-3">
                                     <label htmlFor="correo" className="col-form-label">Email:</label>
-                                    <input type="email" className="form-control" id="correo" value={formData.correo} onChange={handleChange} />
+                                    <input type="email" className="form-control" id="correo" value={formData.correo} onChange={handleChange} required />
                                 </div>
                                 <div className="col-md-6 mb-3">
                                     <label htmlFor="fecha_inscripcion" className="col-form-label">Fecha de inscripción:</label>
-                                    <input type="date" className="form-control" id="fecha_inscripcion" value={formData.fecha_inscripcion} onChange={handleChange} />
+                                    <input type="date" className="form-control" id="fecha_inscripcion" value={formData.fecha_inscripcion} onChange={handleChange} required />
                                 </div>
                             </div>
                             <div className="modal-footer">
