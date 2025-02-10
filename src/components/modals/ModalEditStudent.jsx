@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { studentUpdate } from "../../api/studentsApi.js";
 
-const ModalEditStudent = ({ isOpen, onClose, estudiante }) => {
+const ModalEditStudent = ({ isOpen, onClose, estudiante, onUpdate }) => {
     const [formData, setFormData] = useState({
         nombre: '',
         apellido: '',
@@ -44,15 +44,20 @@ const ModalEditStudent = ({ isOpen, onClose, estudiante }) => {
     // Maneja el envío del formulario
     const handleSubmit = async (e) => {
         e.preventDefault();
-        try {
-            //const response = await studentUpdate(estudiante.id_estudiante, formData);
-            await studentUpdate(estudiante.id_estudiante, formData); // Actualiza el estudiante en la API
-
-            console.log('Estudiante actualizado:');
-            onClose(); // Cierra el modal después de enviar los datos
-        } catch (error) {
-            console.error('Error al actualizar los datos:', error);
+    try {
+        const updatedStudent = await studentUpdate(estudiante.id_estudiante, formData);
+        
+        if (!updatedStudent || !updatedStudent.id_estudiante) {
+            console.error("La API no devolvió los datos actualizados correctamente.");
+            return;
         }
+
+        console.log("Datos actualizados recibidos:", updatedStudent);
+        onUpdate(updatedStudent); // Actualizar en Students.jsx
+        onClose(); // Cerrar modal
+    } catch (error) {
+        console.error("Error al actualizar los datos:", error);
+    }
     };
 
     if (!isOpen) return null;

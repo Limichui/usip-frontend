@@ -21,9 +21,20 @@ export const getStudents = async () => {
 };
 
 export const studentUpdate = async (id, studentData) => {
-    return await axios.put(`${CONFIG.apiHost}/api/estudiantes/${id}`, studentData, {
+    /* return await axios.put(`${CONFIG.apiHost}/api/estudiantes/${id}`, studentData, {
+        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }
+    }); */
+    await axios.put(`${CONFIG.apiHost}/api/estudiantes/${id}`, studentData, {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }
     });
+
+    // Hacer una segunda petición para obtener los datos actualizados
+    const response = await axios.get(`${CONFIG.apiHost}/api/estudiantes/${id}`, {
+        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }
+    });
+
+    console.log("Datos actualizados recibidos:", response.data);
+    return response.data; // Retorna el estudiante actualizado
 };
 
 export const deleteStudent = async (id) => {

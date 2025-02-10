@@ -12,9 +12,10 @@ import "../assets/css/style.css";
 const Students = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(true);
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [isEditModalOpen, setIsEditModalOpen] = useState(false);
     const [students, setStudents] = useState([]);
-    const [estudianteEditando, setEstudianteEditando] = useState(null);
+    //const [estudianteEditando, setEstudianteEditando] = useState(null);
+    const [selectedStudent, setSelectedStudent] = useState(null);
+    const [isEditModalOpen, setIsEditModalOpen] = useState(false);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
@@ -35,9 +36,22 @@ const Students = () => {
         }
     };
 
-    const handleEdit = (estudiante) => {
-        setEstudianteEditando(estudiante);
+    const handleEdit = (student) => {
+        setSelectedStudent(student);
         setIsEditModalOpen(true);
+    };
+
+    const handleUpdateStudent = (updatedStudent) => {
+        if (!updatedStudent || !updatedStudent.id_estudiante) {
+            console.error("Datos incorrectos recibidos en handleUpdateStudent:", updatedStudent);
+            return;
+        }
+    
+        setStudents((prevStudents) =>
+            prevStudents.map((s) =>
+                s.id_estudiante === updatedStudent.id_estudiante ? updatedStudent : s
+            )
+        );
     };
 
     const handleDelete = async (id_estudiante) => {
@@ -54,20 +68,7 @@ const Students = () => {
 
 
     useEffect(() => {
-        const fetchStudents = async () => {
-            try {
-                const response = await getStudents();  // Ajusta esta función según cómo traigas los datos
-                if (Array.isArray(response) && response.length > 0) {
-                    setStudents(response); // Asigna la lista de estudiantes al estado
-                } else {
-                    console.log('No hay estudiantes o los datos no son un array válido');
-                }
-            } catch (error) {
-                console.error("Error al cargar estudiantes:", error);
-            }
-        };
-
-        fetchStudents();
+        fetchStudents(); // Cargar los estudiantes al montar el componente
     }, []);
 
     return (
@@ -172,7 +173,8 @@ const Students = () => {
             {isEditModalOpen && <ModalEditStudent 
                                     isOpen={isEditModalOpen} 
                                     onClose={() => setIsEditModalOpen(false)} 
-                                    estudiante={estudianteEditando} 
+                                    estudiante={selectedStudent}
+                                    onUpdate={handleUpdateStudent}
                                 />
             }
         </div>
