@@ -3,17 +3,27 @@ import { Outlet } from "react-router"; // Importa Outlet
 import Navigator from "../components/navigation/Navigator.jsx"
 import Header from "../components/fragments/Header.jsx"; 
 import Footer from "../components/fragments/Footer.jsx"; 
+import ModalStudent from "../components/modals/ModalStudent.jsx";
 import '../assets/js/layout.js'; 
 import '../assets/js/plugins.js'; 
 import '../assets/css/style.css'
 
 const Students = () => {
-    // Estado para manejar el despliegue del menú
-    const [isMenuOpen, setIsMenuOpen] = useState(true);
+    
+    const [isMenuOpen, setIsMenuOpen] = useState(true); // Estado para manejar el despliegue del menú
+    const [isModalOpen, setIsModalOpen] = useState(false); // Estado para controlar el modal
 
     // Función para alternar el menú
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
+    };
+
+    const openModal = () => {
+        setIsModalOpen(true);
+    };
+
+    const closeModal = () => {
+        setIsModalOpen(false);
     };
 
     // Cargar los scripts después de que el componente se monte
@@ -98,7 +108,12 @@ const Students = () => {
                                             <h4 className="card-title mb-0 flex-grow-1">Registros</h4>
                                             <div className="flex-shrink-0">
                                                 <div className="form-check form-switch form-switch-right form-switch-md">
-                                                    <button type="button" className="btn btn-sm btn-soft-primary">
+                                                    <button 
+                                                        type="button" 
+                                                        className="btn btn-sm btn-soft-primary"
+                                                        data-bs-toggle="modal" 
+                                                        onClick={openModal} // Llama a la función para abrir el modal
+                                                    >
                                                         <i className="ri-add-line align-bottom me-1"></i> Registrar
                                                     </button>
                                                 </div>
@@ -111,48 +126,32 @@ const Students = () => {
                                                     <table className="table table-hover align-middle table-nowrap table-striped-columns mb-0">
                                                         <thead className="table-light">
                                                             <tr>
-                                                                <th scope="col" style={{ width: "46px" }}>
-                                                                    <div className="form-check">
-                                                                        <input className="form-check-input" type="checkbox" id="cardtableCheck" />
-                                                                        <label className="form-check-label" htmlFor="cardtableCheck"></label>
-                                                                    </div>
-                                                                </th>
-                                                                <th scope="col">ID</th>
-                                                                <th scope="col">Avatar</th>
-                                                                <th scope="col">Name</th>
-                                                                <th scope="col">Date</th>
-                                                                <th scope="col">Total</th>
-                                                                <th scope="col">Status</th>
+                                                                <th scope="col">Nro</th>
+                                                                <th scope="col">Nombre Completo</th>
+                                                                <th scope="col">Fecha de Nacimiento</th>
+                                                                <th scope="col">Género</th>
+                                                                <th scope="col">Dirección</th>
+                                                                <th scope="col">Teléfono</th>
+                                                                <th scope="col">Corréo</th>
+                                                                <th scope="col">Fecha de Inscripción</th>
                                                                 <th scope="col" style={{ width: "100px" }}>Action</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
                                                             {[
-                                                                { id: "VL2110", avatar: "avatar-1.jpg", name: "William Elmore", date: "07 Oct, 2021", total: "$24.05", status: "Paid" },
-                                                                { id: "VL2109", avatar: "avatar-2.jpg", name: "Georgie Winters", date: "07 Oct, 2021", total: "$26.15", status: "Paid" },
-                                                                { id: "VL2108", avatar: "avatar-3.jpg", name: "Whitney Meier", date: "06 Oct, 2021", total: "$21.25", status: "Refund" },
-                                                                { id: "VL2107", avatar: "avatar-4.jpg", name: "Justin Maier", date: "05 Oct, 2021", total: "$25.03", status: "Paid" },
+                                                                { id: "1", nombre: "Ana", apellido: "García", fecha_nacimiento: "2001-03-20", genero: "Femenino", direccion: "Calle del Sol 456", telefono: "555-987-6543", correo: "ana.garcia@example.com", fecha_inscripcion: "2024-07-26" },
+                                                                { id: "2", nombre: "Carlos", apellido: "López", fecha_nacimiento: "1999-11-05", genero: "Masculino", direccion: "Avenida de la Luna 789", telefono: "555-101-1122", correo: "carlos.lopez@example.com", fecha_inscripcion: "2024-07-26" },
+                                                                { id: "3", nombre: "Sofía", apellido: "Martínez", fecha_nacimiento: "2002-07-12", genero: "Femenino", direccion: "Plaza de las Flores 101", telefono: "555-223-3344", correo: "sofia.martinez@example.com", fecha_inscripcion: "2024-07-26" },
                                                             ].map((row, index) => (
                                                                 <tr key={row.id}>
-                                                                    <td>
-                                                                        <div className="form-check">
-                                                                            <input className="form-check-input" type="checkbox" id={`cardtableCheck0${index + 1}`} />
-                                                                            <label className="form-check-label" htmlFor={`cardtableCheck0${index + 1}`}></label>
-                                                                        </div>
-                                                                    </td>
-                                                                    <td><a href="#" className="fw-medium">#{row.id}</a></td>
-                                                                    <td>
-                                                                        <div className="d-flex gap-2 align-items-center">
-                                                                            <div className="flex-shrink-0">
-                                                                                <img src={`assets/images/users/${row.avatar}`} alt="" className="avatar-xs rounded-circle" />
-                                                                            </div>
-                                                                            <div className="flex-grow-1">Jordan Kennedy</div>
-                                                                        </div>
-                                                                    </td>
-                                                                    <td>{row.name}</td>
-                                                                    <td>{row.date}</td>
-                                                                    <td>{row.total}</td>
-                                                                    <td><span className={`badge bg-${row.status === "Paid" ? "success" : "danger"}`}>{row.status}</span></td>
+                                                                    <td>{row.id}</td>
+                                                                    <td>{row.nombre} {row.apellido}</td>
+                                                                    <td>{row.fecha_nacimiento}</td>
+                                                                    <td>{row.genero}</td>
+                                                                    <td>{row.direccion}</td>
+                                                                    <td>{row.telefono}</td>
+                                                                    <td>{row.correo}</td>
+                                                                    <td>{row.fecha_inscripcion}</td>
                                                                     <td>
                                                                         <div className="hstack gap-3 fs-15">
                                                                             <a href="#" className="link-secondary"><i className="ri-edit-2-fill"></i></a>
@@ -175,6 +174,8 @@ const Students = () => {
                     <Footer isMenuOpen={isMenuOpen} />
                 </div>
             </div>
+            {/* ModalStudent Component */}
+            {isModalOpen && <ModalStudent isOpen={isModalOpen} onClose={closeModal} />}
         </div>
     );
 };

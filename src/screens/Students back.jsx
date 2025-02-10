@@ -1,10 +1,13 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { Outlet } from "react-router"; // Importa Outlet
+import Navigator from "../components/navigation/Navigator.jsx"
+import Header from "../components/fragments/Header.jsx"; 
+import Footer from "../components/fragments/Footer.jsx"; 
 import '../assets/js/layout.js'; 
 import '../assets/js/plugins.js'; 
 import '../assets/css/style.css'
 
-const Dashboard = () => {
-
+const Students = () => {
     // Estado para manejar el despliegue del menú
     const [isMenuOpen, setIsMenuOpen] = useState(true);
 
@@ -13,60 +16,23 @@ const Dashboard = () => {
         setIsMenuOpen(!isMenuOpen);
     };
 
+    // Cargar los scripts después de que el componente se monte
+    useEffect(() => {
+        import('../assets/js/app.js').then(module => {
+            if (module.default) module.default();
+        });
+    }, []); // El array vacío asegura que esto se ejecute solo una vez, después del montaje
+
     return (
         <div>
             {/* Begin page */}
             <div id="layout-wrapper">
-                <header id="page-topbar" className={isMenuOpen ? "" : "expanded-header"}>
-                    <div className="layout-width" > 
-                        <div className="navbar-header">
-                            <div className="d-flex">
-                                <button 
-                                    type="button" 
-                                    className="btn btn-sm px-3 fs-16 header-item vertical-menu-btn topnav-hamburger material-shadow-none" 
-                                    id="topnav-hamburger-icon"
-                                    onClick={toggleMenu}
-                                >
-                                    <span className="hamburger-icon">
-                                        <span></span>
-                                        <span></span>
-                                        <span></span>
-                                    </span>
-                                </button>
-                            </div>
-
-                            <div className="d-flex align-items-center">
-                                
-                                <div className="dropdown ms-sm-3 header-item topbar-user">
-                                    <button type="button" className="btn material-shadow-none" id="page-header-user-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <span className="d-flex align-items-center">
-                                            <img className="rounded-circle header-profile-user" src="/assets/images/users/avatar-1.jpg" alt="Header Avatar" />
-                                            <span className="text-start ms-xl-2">
-                                                <span className="d-none d-xl-inline-block ms-1 fw-medium user-name-text">Anna Adame</span>
-                                                <span className="d-none d-xl-block ms-1 fs-12 user-name-sub-text">Founder</span>
-                                            </span>
-                                        </span>
-                                    </button>
-                                    <div className="dropdown-menu dropdown-menu-end">
-                                        {/* item */}
-                                        <a className="dropdown-item" href="pages-profile.html">
-                                            <i className="mdi mdi-account-circle text-muted fs-16 align-middle me-1"></i> <span className="align-middle">Profile</span>
-                                        </a>
-                                        <div className="dropdown-divider"></div>
-                                        <a className="dropdown-item" href="auth-logout-basic.html">
-                                            <i className="mdi mdi-logout text-muted fs-16 align-middle me-1"></i> <span className="align-middle" data-key="t-logout">Logout</span>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </header>
+                <Header isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />
 
                 {/* ========== App Menu ========== */}
-                <div className="app-menu navbar-menu " >
+                <div className={`app-menu navbar-menu ${isMenuOpen ? "menu-open" : ""}`}>
                     {/* LOGO */}
-                    <div className={`app-menu navbar-menu ${isMenuOpen ? "menu-open" : ""}`}>
+                    
                         <div className="navbar-brand-box">
                             {/* Dark Logo */}
                             <a href="index.html" className="logo logo-dark">
@@ -94,59 +60,12 @@ const Dashboard = () => {
                         <div id="scrollbar">
                             <div className="container-fluid">
                                 <div id="two-column-menu"></div>
-                                <ul className="navbar-nav" id="navbar-nav">
-                                    <li className="menu-title"><span data-key="t-menu">Menu</span></li>
-                                    <li className="nav-item">
-                                        <a className="nav-link menu-link nav-style" href="#sidebarDashboards" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarDashboards">
-                                            <div>
-                                                <i className="ri-dashboard-2-line"></i> <span data-key="t-dashboards">Panel de Control</span>
-                                            </div>
-                                            
-                                        </a>
-                                        <div className="collapse menu-dropdown" id="sidebarDashboards">
-                                            <ul className="nav nav-sm flex-column">
-                                                <li className="nav-item">
-                                                    <a href="dashboard-analytics.html" className="nav-link" data-key="t-analytics"> Analytics </a>
-                                                </li>
-                                                <li className="nav-item">
-                                                    <a href="dashboard-crm.html" className="nav-link" data-key="t-crm"> CRM </a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </li>
-
-                                    <li className="nav-item">
-                                        <a className="nav-link menu-link nav-style" href="widgets.html">
-                                            <div>
-                                                <i className="ri-group-fill"></i> <span data-key="t-widgets" >Estudiantes</span>
-                                            </div>
-                                            
-                                        </a>
-                                    </li>
-
-                                    <li className="nav-item">
-                                        <a className="nav-link menu-link nav-style" href="widgets.html">
-                                            <div>
-                                                <i className="ri-user-settings-fill"></i> <span data-key="t-widgets">Docentes</span>
-                                            </div>
-                                            
-                                        </a>
-                                    </li>
-
-                                    <li className="nav-item">
-                                        <a className="nav-link menu-link nav-style" href="widgets.html">
-                                            <div>
-                                                <i className="ri-folder-settings-fill"></i> <span data-key="t-widgets">Cursos</span>
-                                            </div>
-                                            
-                                        </a>
-                                    </li>
-                                </ul>
+                                <Navigator />
                             </div>
                         </div>
 
                         <div className="sidebar-background"></div>
-                    </div>
+                    
                 </div>
                 {/* Left Sidebar End */}
 
@@ -159,11 +78,14 @@ const Dashboard = () => {
                 <div className={`main-content ${isMenuOpen ? "expanded" : "full-width"}`}>
                     <div className="page-content">
                         <div className="container-fluid">
+                            {/* Outlet: Aquí se renderiza el contenido de la ruta actual */}
+                            <Outlet />
+
                             {/* start page title */}
                             <div className="row">
                                 <div className="col-12">
                                     <div className="page-title-box d-sm-flex align-items-center justify-content-between bg-galaxy-transparent">
-                                        <h4 className="mb-sm-0">Panel de control</h4>
+                                        <h4 className="mb-sm-0">Panel de Estudiantes</h4>
                                     </div>
                                 </div>
                             </div>
@@ -250,24 +172,11 @@ const Dashboard = () => {
                         </div>
                     </div>
 
-                    <footer className="footer">
-                        <div className="container-fluid">
-                            <div className="row">
-                                <div className="col-sm-6">
-                                    © Sistema de Gestión Estidaintil USIP.
-                                </div>
-                                <div className="col-sm-6">
-                                    <div className="text-sm-end d-none d-sm-block">
-                                        Diseñado & Desarrollado por: Grupo 4
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </footer>
+                    <Footer isMenuOpen={isMenuOpen} />
                 </div>
             </div>
         </div>
     );
 };
 
-export default Dashboard;
+export default Students;

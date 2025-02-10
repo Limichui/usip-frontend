@@ -8,5 +8,5 @@ export default defineConfig({
   css: {
     devSourcemap: false, // Evita la carga de source maps en CSS
     sourcemap: false, 
-  }
+  },
 })

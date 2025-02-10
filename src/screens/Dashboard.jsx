@@ -31,7 +31,6 @@ const Dashboard = () => {
             <div id="layout-wrapper">
                 <Header isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />
                 
-
                 {/* ========== App Menu ========== */}
                 <div className={`app-menu navbar-menu ${isMenuOpen ? "menu-open" : ""}`}>
                     {/* LOGO */}
