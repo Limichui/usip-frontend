@@ -2,6 +2,7 @@ import axios from "axios";
 import CONFIG from "../config/config";
 
 export const studentCreate = async (studentData) => {
+    console.log(studentData);
     return axios.post(`${CONFIG.apiHost}/api/estudiantes/`, studentData);
 }
 

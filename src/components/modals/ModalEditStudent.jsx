@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { studentUpdate } from "../../api/studentsApi.js";
 
-const ModalEditStudent = ({ isOpen, onClose, estudiante, updateStudentList }) => {
+const ModalEditStudent = ({ isOpen, onClose, estudiante }) => {
     const [formData, setFormData] = useState({
         nombre: '',
         apellido: '',
@@ -19,9 +19,9 @@ const ModalEditStudent = ({ isOpen, onClose, estudiante, updateStudentList }) =>
             const formatFecha = (fecha) => {
                 if (!fecha) return "";
                 const date = new Date(fecha);
-                const year = date.getFullYear();
-                const month = String(date.getMonth() + 1).padStart(2, "0"); // Meses son 0-indexados
-                const day = String(date.getDate()).padStart(2, "0"); // Obtiene el día correctamente
+                const year = date.getUTCFullYear();
+                const month = String(date.getUTCMonth() + 1).padStart(2, "0"); // Mes en UTC
+                const day = String(date.getUTCDate()).padStart(2, "0"); // Día en UTC
                 return `${year}-${month}-${day}`;
             };
             setFormData({

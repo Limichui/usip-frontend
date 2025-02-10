@@ -136,12 +136,12 @@ const Students = () => {
                                                             <tr key={row.id_estudiante}>
                                                                 <td>{index + 1}</td>
                                                                 <td>{row.nombre} {row.apellido}</td>
-                                                                <td>{new Date(row.fecha_nacimiento).toLocaleDateString('es-ES')}</td>
+                                                                <td>{row.fecha_nacimiento.split("T")[0]}</td>
                                                                 <td>{row.genero}</td>
                                                                 <td>{row.direccion}</td>
                                                                 <td>{row.telefono}</td>
                                                                 <td>{row.correo}</td>
-                                                                <td>{new Date(row.fecha_inscripcion).toLocaleDateString('es-ES')}</td>
+                                                                <td>{row.fecha_inscripcion.split("T")[0]}</td>
                                                                 <td>
                                                                     <div className="hstack gap-3 fs-15">
                                                                         <button onClick={() => handleEdit(row)} className="btn btn-link link-secondary p-0 border-0">
