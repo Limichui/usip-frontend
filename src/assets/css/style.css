@@ -155,19 +155,4 @@ body {
     justify-content: space-around;
 }
 
-.cancel-button {
-    background: gray;
-    color: white;
-    padding: 10px;
-    border: none;
-    cursor: pointer;
-}
-
-.delete-button {
-    background: red;
-    color: white;
-    padding: 10px;
-    border: none;
-    cursor: pointer;
-}
     

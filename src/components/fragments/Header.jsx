@@ -33,15 +33,15 @@ const Header = ({ isMenuOpen, toggleMenu }) => {
                                 <span className="d-flex align-items-center">
                                     <img
                                         className="rounded-circle header-profile-user"
-                                        src="/assets/images/users/avatar-1.jpg"
+                                        src="/assets/images/users/avatar-default.jpg"
                                         alt="Header Avatar"
                                     />
                                     <span className="text-start ms-xl-2">
                                         <span className="d-none d-xl-inline-block ms-1 fw-medium user-name-text">
-                                            Anna Adame
+                                            Admin
                                         </span>
                                         <span className="d-none d-xl-block ms-1 fs-12 user-name-sub-text">
-                                            Founder
+                                            Administrador
                                         </span>
                                     </span>
                                 </span>

@@ -37,7 +37,7 @@ const Dashboard = () => {
                     
                         <div className="navbar-brand-box">
                             {/* Dark Logo */}
-                            <a href="index.html" className="logo logo-dark">
+                            <a href="/dashboard" className="logo logo-dark">
                                 <span className="logo-sm">
                                     <img src="assets/images/logo-sm.png" alt="" height="30" />
                                 </span>
@@ -46,7 +46,7 @@ const Dashboard = () => {
                                 </span>
                             </a>
                             {/* Light Logo */}
-                            <a href="index.html" className="logo logo-light">
+                            <a href="/dashboard" className="logo logo-light">
                                 <span className="logo-sm">
                                     <img src="assets/images/logo-sm.png" alt="" height="30" />
                                 </span>
@@ -95,77 +95,20 @@ const Dashboard = () => {
 
                             <div className="row">
                                 <div className="col-xl-12">
-                                    <div className="card">
-                                        <div className="card-header align-items-center d-flex">
-                                            <h4 className="card-title mb-0 flex-grow-1">Registros</h4>
-                                            <div className="flex-shrink-0">
-                                                <div className="form-check form-switch form-switch-right form-switch-md">
-                                                    <button type="button" className="btn btn-sm btn-soft-primary">
-                                                        <i className="ri-add-line align-bottom me-1"></i> Registrar
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div className="card-body">
+                                    <div className="card" style={{ height: "75vh" }}>
+                                        <div className="card-body" style={{ height: "100%", display: "flex", alignItems: "center", justifyContent: "center" }}>
                                             <div className="live-preview">
-                                                <div className="table-responsive table-card">
-                                                    <table className="table table-hover align-middle table-nowrap table-striped-columns mb-0">
-                                                        <thead className="table-light">
-                                                            <tr>
-                                                                <th scope="col" style={{ width: "46px" }}>
-                                                                    <div className="form-check">
-                                                                        <input className="form-check-input" type="checkbox" id="cardtableCheck" />
-                                                                        <label className="form-check-label" htmlFor="cardtableCheck"></label>
-                                                                    </div>
-                                                                </th>
-                                                                <th scope="col">ID</th>
-                                                                <th scope="col">Avatar</th>
-                                                                <th scope="col">Name</th>
-                                                                <th scope="col">Date</th>
-                                                                <th scope="col">Total</th>
-                                                                <th scope="col">Status</th>
-                                                                <th scope="col" style={{ width: "100px" }}>Action</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            {[
-                                                                { id: "VL2110", avatar: "avatar-1.jpg", name: "William Elmore", date: "07 Oct, 2021", total: "$24.05", status: "Paid" },
-                                                                { id: "VL2109", avatar: "avatar-2.jpg", name: "Georgie Winters", date: "07 Oct, 2021", total: "$26.15", status: "Paid" },
-                                                                { id: "VL2108", avatar: "avatar-3.jpg", name: "Whitney Meier", date: "06 Oct, 2021", total: "$21.25", status: "Refund" },
-                                                                { id: "VL2107", avatar: "avatar-4.jpg", name: "Justin Maier", date: "05 Oct, 2021", total: "$25.03", status: "Paid" },
-                                                            ].map((row, index) => (
-                                                                <tr key={row.id}>
-                                                                    <td>
-                                                                        <div className="form-check">
-                                                                            <input className="form-check-input" type="checkbox" id={`cardtableCheck0${index + 1}`} />
-                                                                            <label className="form-check-label" htmlFor={`cardtableCheck0${index + 1}`}></label>
-                                                                        </div>
-                                                                    </td>
-                                                                    <td><a href="#" className="fw-medium">#{row.id}</a></td>
-                                                                    <td>
-                                                                        <div className="d-flex gap-2 align-items-center">
-                                                                            <div className="flex-shrink-0">
-                                                                                <img src={`assets/images/users/${row.avatar}`} alt="" className="avatar-xs rounded-circle" />
-                                                                            </div>
-                                                                            <div className="flex-grow-1">Jordan Kennedy</div>
-                                                                        </div>
-                                                                    </td>
-                                                                    <td>{row.name}</td>
-                                                                    <td>{row.date}</td>
-                                                                    <td>{row.total}</td>
-                                                                    <td><span className={`badge bg-${row.status === "Paid" ? "success" : "danger"}`}>{row.status}</span></td>
-                                                                    <td>
-                                                                        <div className="hstack gap-3 fs-15">
-                                                                            <a href="#" className="link-secondary"><i className="ri-edit-2-fill"></i></a>
-                                                                            <a href="#" className="link-danger"><i className="ri-delete-bin-5-line"></i></a>
-                                                                        </div>
-                                                                    </td>
-                                                                </tr>
-                                                            ))}
-                                                        </tbody>
-                                                    </table>
-                                                </div>
+                                                <img 
+                                                    src="./assets/images/logo.png" 
+                                                    alt="Logo" 
+                                                    style={{
+                                                        maxHeight: "300px",
+                                                        minHeight: "150px",
+                                                        height: "auto",
+                                                        width: "100%",
+                                                        objectFit: "contain"
+                                                    }}
+                                                />
                                             </div>
                                         </div>
                                     </div>

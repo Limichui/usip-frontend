@@ -24,7 +24,7 @@ const Navigator = () => {
                     </div>
                 </Link>
             </li>
-
+            {/*
             <li className="nav-item">
                 <Link to="/teachers" className="nav-link menu-link nav-style">
                     <div>
@@ -42,6 +42,7 @@ const Navigator = () => {
                     </div>
                 </Link>
             </li>
+            */}
         </ul>
     );
 };

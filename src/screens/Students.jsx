@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import { Outlet } from "react-router";
+import { useNavigate } from "react-router";
+import useAuth from "../components/hooks/useAuth.js"
 import Navigator from "../components/navigation/Navigator.jsx";
 import Header from "../components/fragments/Header.jsx";
 import Footer from "../components/fragments/Footer.jsx";
@@ -11,6 +13,8 @@ import { getStudents, deleteStudent } from "../api/studentsApi.js";
 import "../assets/css/style.css";
 
 const Students = () => {
+    useAuth();
+
     const [isMenuOpen, setIsMenuOpen] = useState(true);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [students, setStudents] = useState([]);
@@ -90,7 +94,7 @@ const Students = () => {
 
                 <div className={`app-menu navbar-menu ${isMenuOpen ? "menu-open" : ""}`}>
                     <div className="navbar-brand-box">
-                        <a href="/" className="logo logo-dark">
+                        <a href="/dashboard" className="logo logo-dark">
                             <span className="logo-sm">
                                 <img src="/assets/images/logo-sm.png" alt="Logo" height="30" />
                             </span>

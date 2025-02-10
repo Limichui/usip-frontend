@@ -68,7 +68,7 @@ const FormLogin = () => {
                     <div className="col-lg-12">
                         <div className="text-center mt-sm-5 mb-4 text-white-50">
                             <div>
-                                <a href="index.html" className="d-inline-block auth-logo">
+                                <a href="/" className="d-inline-block auth-logo">
                                     <img src="./assets/images/logo-light.png" alt="" height="20" />
                                 </a>
                             </div>
