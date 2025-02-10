@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
-import { studentCreate } from "../../api/studentsApi.js";
+import React, { useState, useEffect } from 'react';
+import { studentUpdate } from "../../api/studentsApi.js";
 
-
-const ModalStudent = ({ isOpen, onClose }) => {
+const ModalEditStudent = ({ isOpen, onClose, estudiante }) => {
     const [formData, setFormData] = useState({
         nombre: '',
         apellido: '',
@@ -13,6 +12,35 @@ const ModalStudent = ({ isOpen, onClose }) => {
         correo: '',
         fecha_inscripcion: ''
     });
+
+    // Carga los datos del estudiante en el formulario
+    useEffect(() => {
+        if (estudiante) {
+            const formatFecha = (fecha) => {
+                if (!fecha) return "";
+                const date = new Date(fecha);
+                const year = date.getFullYear();
+                const month = String(date.getMonth() + 1).padStart(2, "0"); // Meses son 0-indexados
+                const day = String(date.getDate()).padStart(2, "0"); // Obtiene el día correctamente
+                return `${day}-${month}-${year}`;
+            };
+            //setFormData(estudiante);
+            setFormData({
+                ...estudiante,
+                
+                fecha_nacimiento: formatFecha(estudiante.fecha_nacimiento),
+                fecha_inscripcion: formatFecha(estudiante.fecha_inscripcion),
+                /*
+                fecha_nacimiento: estudiante.fecha_nacimiento 
+                    ? new Date(estudiante.fecha_nacimiento).toISOString().split('T')[0] // Formato de fecha
+                    : "",
+                fecha_inscripcion: estudiante.fecha_inscripcion
+                    ? new Date(estudiante.fecha_inscripcion).toISOString().split('T')[0] // Formato de fecha
+                    : "",
+                */
+            });
+        }
+    }, [estudiante]);
 
     // Maneja los cambios en los campos del formulario
     const handleChange = (e) => {
@@ -27,8 +55,10 @@ const ModalStudent = ({ isOpen, onClose }) => {
     const handleSubmit = async (e) => {
         e.preventDefault(); // Evita que el formulario se envíe de forma tradicional
         try {
-            const response = await studentCreate(formData); // Envía los datos a la API
-            console.log('Respuesta del servidor:', response.data);
+            const response = await studentUpdate(estudiante.id_estudiante, formData); // Actualiza el estudiante
+            // Actualizar la lista de estudiantes después de la edición
+            updateStudentList(response.data); // Llamamos a la función para actualizar la lista
+            console.log('Estudiante actualizado:', response.data);
             onClose(); // Cierra el modal después de enviar los datos
         } catch (error) {
             console.error('Error al enviar los datos:', error);
@@ -39,14 +69,15 @@ const ModalStudent = ({ isOpen, onClose }) => {
 
     return (
         <div className={`modal fade ${isOpen ? "show d-block" : ""}`} tabIndex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden={!isOpen}>
-            <div className="modal-dialog modal-lg"> 
+            <div className="modal-dialog modal-lg">
                 <div className="modal-content">
                     <div className="modal-header">
-                        <h5 className="modal-title" id="myLargeModalLabel">Nuevo Estudiante</h5>
+                        <h5 className="modal-title" id="myLargeModalLabel">Editar Estudiante</h5>
                         <button type="button" className="btn-close" onClick={onClose} aria-label="Close"></button>
                     </div>
                     <div className="modal-body">
-                        <form onSubmit={handleSubmit}> {/* Asocia el evento onSubmit al formulario */}
+                        <form onSubmit={handleSubmit}>
+                            {/* Campos del formulario */}
                             <div className="row">
                                 <div className="col-md-6 mb-3">
                                     <label htmlFor="nombre" className="col-form-label">Nombre:</label>
@@ -95,7 +126,7 @@ const ModalStudent = ({ isOpen, onClose }) => {
                                 </div>
                             </div>
                             <div className="modal-footer">
-                                <button type="submit" className="btn btn-primary">Registrar</button> {/* Botón de tipo submit */}
+                                <button type="submit" className="btn btn-primary">Actualizar</button>
                                 <button type="button" className="btn btn-secondary" onClick={onClose}>Cerrar</button>
                             </div>
                         </form>
@@ -106,10 +137,7 @@ const ModalStudent = ({ isOpen, onClose }) => {
     );
 };
 
-export default ModalStudent;
-
-
-
+export default ModalEditStudent;
 
 
 
